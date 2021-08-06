@@ -1,3 +1,3 @@
-# P1-Leo-tocomo
+# p1.LeonarN
 Project 1: Tocomo 
 Tocomo: cross Money Transfer.
