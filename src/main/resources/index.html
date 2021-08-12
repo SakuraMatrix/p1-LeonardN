@@ -1,0 +1,140 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+	body {font-family: Arial;}
+
+	/* style the header */
+	.header {
+	text-align = center;
+	text-color = green;
+	background-color:#C5A78B ;
+	}
+
+	/* Style the tab */
+	.tab {
+	  overflow: hidden;
+	  border: 1px solid #ccc;
+	  background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+	  background-color: inherit;
+	  float: left;
+	  border: none;
+	  outline: none;
+	  cursor: pointer;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	  font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+	  background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+	  background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+	  display: none;
+	  padding: 6px 12px;
+	  border: 1px solid #ccc;
+	  border-top: none;
+	}
+</style>
+</head>
+<body>
+<div id="header" class="header">
+    <h2>     Tocomo   </h2>
+    <h3>  Transfer Funds </h3>
+</div>
+
+<div class="tab">
+    <button class="tablinks" onclick="customerService(event, 'Register')">Register</button>
+    <button class="tablinks" onclick="customerService(event, 'Send')">Send</button>
+    <button class="tablinks" onclick="customerService(event, 'Transactions')">Transactions</button>
+</div>
+
+
+<div id="Send" class="tabcontent">
+    <form action="action_page.php">
+        <div class="container" border = 2px, black>
+            <h1> Send Money </h1>
+            <p> </p>
+            <hr>
+
+            <label for="userName"><b>User Name</b></label>
+            <input type="text" placeholder="User Name" name="userName" id="user-Name" required>
+
+            <label for="sendTo"><b>Send To</b></label>
+            <input type="text" placeholder="Send To" name="sendTo" id="send-to" required>
+
+            <label for="amount"><b>Send Amount</b></label>
+            <input type="double" placeholder="$0.00" name="send-amount" id="send-amount" required>
+            <hr>
+            <div>
+                <label for = "cRate"> <b><i>Conversion Rate: 1:1 </i></b></label>
+                </br>
+                <label for = "fAmount"><b><i>Receive Amount: <i></b></label>
+            </div>
+            <p>Click the Submit button to Continue!</a>.</p>
+            <button type="submit" class="sendBtn">Send cash</button>
+        </div>
+
+
+        <div class="Sender">
+            <p> <a href="#">View Transactions</a>.</p>
+        </div>
+    </form>
+</div>
+
+<div id="Register" class="tabcontent">
+    <form action="Register_page.php">
+        <div class="container">
+            <h1>Register</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+
+            <label for="userName"><b>User Name</b></label>
+            <input type="text" placeholder="User Name" name="userName" id="userName" required>
+
+            <label for="customer"><b>Name</b></label>
+            <input type="text" placeholder="Smith John" name="customer" id="customer" required>
+
+            <label for="deposit"><b>Enter Deposit</b></label>
+            <input type="double" placeholder="$0000.00" name="deposit" id="deposit" required>
+            <hr>
+
+            <p>Click the Submit Button to Register </a>.</p>
+            <button type="Register" class="registerbtn">Register</button>
+        </div>
+
+</div>
+</form>
+</div>
+<div id="Transactions" class="tabcontent">
+    <h2> Transaction Lists </h2>
+</div>
+<script>
+	function customerService(evt, Request) {
+	  var i, tabcontent, tablinks;
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+	  document.getElementById(Request).style.display = "block";
+	  evt.currentTarget.className += " active";
+	}
+</script>
+</body>
+</html>
