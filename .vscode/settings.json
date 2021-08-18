@@ -1,0 +1,11 @@
+{
+    "docker.containers.description": [
+        "ContainerName",
+        "Status",
+        "Ports",
+        "Compose Project Name"
+    ],
+    "git.ignoredRepositories": [
+        "/target, /.idea/.vscode"
+    ]
+}
