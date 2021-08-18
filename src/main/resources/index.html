@@ -98,7 +98,7 @@
 
 
 		<div class="Sender">
-			<p> <a href="">View Transactions</a>.</p>
+			<p> <a href="/trx">View Activity</a>.</p>
 				
 		</div>
 	
@@ -127,11 +127,37 @@
 	
 
 <div id="Transactions" class="tabcontent" style="display: none;">
-<h2> Transaction Lists </h2>
+<h2> Activity Details </h2>
 	<div>
-		<form method="post" action="/trx">
-			<button type="Register" class="registerbtn">View Activity</button>
-		</form>
+			<a href = "/trx">
+				<button type="Submit" class="submitBtn">View Activity</button>
+			</a>
+		<select id="myselect" onchange="change_myselect(this.value)">
+			<option value="">Choose an option:</option>
+			<option value="customers">Customers</option>
+			<option value="trx">Transactions</option>
+		</select>
+		<p id="tableView"></p>
+		<script>
+			function change_myselect(sel) {
+			  const dbParam = JSON.stringify({table:sel,limit:10});
+			  const xmlhttp = new XMLHttpRequest();
+			  xmlhttp.onload = function() {
+				const myObj = JSON.parse(this.responseText);
+				let text = "<table border='1'>"
+				for (let x in myObj) {
+				  text += "<tr><td>" + myObj[x].name + "</td></tr>";
+				}
+				text += "</table>"
+				document.getElementById("tableView").innerHTML = txt;
+			  }
+			  xmlhttp.open("POST", text);
+			  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			  xmlhttp.send("x=" + dbParam);
+			}
+	</script>
+
+
 	</div>
 </div>
 

@@ -25,22 +25,22 @@ public class CustomerRepository {
 
     public Flux<Customer> getAllCust() {
         return Flux.from(session.executeReactive("SELECT * FROM tocomo.customers;"))
-                .map(row -> cust.customerQuery(row.getString("user_name"), row.getString("name")));
+                .map(row -> cust.customerQuery(row.getString("name"), row.getString("user_name")));
     }
 
     public Flux<Transactions> getAllTrx() {
-        return Flux.from(session.executeReactive("SELECT  user_name, client_name, amount, trx_type  FROM tocomo.transactions"))
+        return Flux.from(session.executeReactive("SELECT  user_name, client_name, amount, trx_type  FROM tocomo.transactions;"))
                 .map(row -> trx.trxQuery(row.getString("user_name"), row.getString("client_name"), row.getDouble("amount"),   row.getString("trx_type")));
     }
 
     public Mono<Customer> getCust(String id) {
-        return Mono.from(session.executeReactive("SELECT * FROM tocomo.customers WHERE user_name = ?  OR name = ? " ))
+        return Mono.from(session.executeReactive("SELECT * FROM tocomo.customers WHERE user_name = ?  OR name = ? ;" ))
                 .map(row -> cust.getCustomer(row.getString("user_id"), row.getString("name"), row.getString("user_name")));
     }
 
     public Customer createCust(Customer customer){
         SimpleStatement statement =
-                SimpleStatement.builder( "INSERT INTO tocomo.customers (user_name, user_id, name, trx_id) VALUES (?,?,?,?) IF not EXISTS")
+                SimpleStatement.builder( "INSERT INTO tocomo.customers (user_name, user_id, name, trx_id) VALUES (?,?,?,?) IF not EXISTS;")
                         .addPositionalValues(customer.getUserName(), customer.getUserId(), customer.getTrxId())
                         .build();
         Flux.from(session.executeReactive(statement)).subscribe();

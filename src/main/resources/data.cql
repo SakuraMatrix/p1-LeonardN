@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS customers(
 	user_name Text,
 	name Text,
 	trx_id timeuuid,
-	PRIMARY KEY (user_name, user_id)
+	PRIMARY KEY (user_name, name, user_id)
 );
 
 USE tocomo;
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS transactions(
 	status Boolean,
 	trx_key timeuuid,
 	amount Double,
-	PRIMARY KEY (trx_key, user_id, user_name)
+	PRIMARY KEY ( user_id, user_name, trx_key)
 );
 
 INSERT INTO tocomo.customers
