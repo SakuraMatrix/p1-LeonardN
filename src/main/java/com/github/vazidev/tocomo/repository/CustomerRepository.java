@@ -4,6 +4,7 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.SimpleStatement;
 import com.github.vazidev.tocomo.domain.Customer;
 import com.github.vazidev.tocomo.domain.Transactions;
+import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,10 +12,12 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @Repository
-// makes call to the CQL database
-public class CustomerRepository {
+// makes call to the Customers database
+public interface CustomerRepository extends ReactiveCassandraRepository<Customer, Integer> {
 
-
+}
+/**All the statements belwo replace by Spring Cassandra with the in build classes
+ public class CustomerRepository {
     private CqlSession session;
 
         Customer cust = new Customer();
@@ -79,4 +82,4 @@ public class CustomerRepository {
         return Mono.from(session.executeReactive("SELECT * FROM tocomo.transactions WHERE user_name = ?  OR name = ? ;" ))
                 .map(row -> trx.trxQuery(row.getString("user_name"), row.getString("name"), row.getInt("amount"), row.getString("client_name"), row.getString("trx_type")));
     }
-}
+}**/

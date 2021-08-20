@@ -3,35 +3,33 @@ package com.github.vazidev.tocomo.service;
 import com.github.vazidev.tocomo.domain.Customer;
 import com.github.vazidev.tocomo.domain.Transactions;
 import com.github.vazidev.tocomo.repository.CustomerRepository;
+import com.github.vazidev.tocomo.repository.TrxRepository;
+import org.springframework.data.cassandra.repository.AllowFiltering;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 @Service
 public class CustomerService {
 
-    private CustomerRepository customerRepository;
+    public CustomerRepository customerRepository;
+    public TrxRepository trxRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    @AllowFiltering
+    public Flux<Customer> getAllCust() { return customerRepository.findAll(); }
 
-    public Flux<Customer> getAllCust() {
-        return customerRepository.getAllCust();
-    }
+    public  Mono<Customer> getCust( String cust) { return customerRepository.findById(Integer.parseInt(cust));} //get single Customer by user_name/name
 
-    public Flux<Transactions> getAllTrx() { return customerRepository.getAllTrx();}
+    public  Mono<Customer> getCust( int cust) { return customerRepository.findById(cust);} //get single Customer by user_name/name
 
-    public Mono<Customer> getCust(String Id) { return customerRepository.getCust(Integer.parseInt(Id)); } //get Single Customer by user_id
+    public Mono<Customer> createCust(Customer cust) { return customerRepository.save(cust); }
 
-    public  Mono<Customer> getCust(int Id) { return customerRepository.getCust(Id);} //get single Customer by user_name/name
+    public Flux<Transactions> getAllTrx() { return trxRepository.findAll();}
 
-    public Mono<Transactions> getTrx(String Id) { return customerRepository.getTrx(Id); } // get single Transaction by name or user_name
+    public Mono<Transactions> getTrx(String user_name) { return trxRepository.findById(Integer.parseInt(user_name)); }
 
-    public Customer createCust(Customer customer) { return customerRepository.createCust(customer); }
+    public Mono<Transactions> getTrx(int trx) { return trxRepository.findById(trx); } // get single Transaction by name or user_name
 
-    public Transactions createTrx(Transactions transactions) { return (Transactions) customerRepository.createTrx(transactions); }
-
-    public Customer updateCust(Customer customer) {return customerRepository.updateCust(customer); }
+    public Mono<Transactions> createTrx(Transactions trx) { return trxRepository.save(trx); }
 
 
 }

@@ -1,4 +1,4 @@
-package service;
+package com.github.vazidev.tocomo.service;
 import com.datastax.oss.driver.api.querybuilder.schema.CreateKeyspace;
 import com.datastax.oss.driver.api.querybuilder.schema.CreateKeyspace.*;
 import com.datastax.oss.driver.api.querybuilder.schema.CreateKeyspaceStart;
