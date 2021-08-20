@@ -4,12 +4,13 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.SimpleStatement;
 import com.github.vazidev.tocomo.domain.Customer;
 import com.github.vazidev.tocomo.domain.Transactions;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-
+@Repository
 // makes call to the CQL database
 public class CustomerRepository {
 
@@ -38,10 +39,17 @@ public class CustomerRepository {
                 .map(row -> cust.getCustomer(row.getString("user_id"), row.getString("name"), row.getString("user_name")));
     }
 
+    public Mono<Customer> getCust(Integer id) {
+        return Mono.from(session.executeReactive("SELECT * FROM tocomo.customers WHERE user_name = ?  OR name = ? ;" ))
+                .map(row -> cust.getCustomer(row.getString("user_id"), row.getString("name"), row.getString("user_name")));
+    }
+
+
+
     public Customer createCust(Customer customer){
         SimpleStatement statement =
-                SimpleStatement.builder( "INSERT INTO tocomo.customers (user_name, user_id, name, trx_id) VALUES (?,?,?,?) IF not EXISTS;")
-                        .addPositionalValues(customer.getUserName(), customer.getUserId(), customer.getTrxId())
+                SimpleStatement.builder( "INSERT INTO tocomo.customers (user_name, name, user_id, trx_id) VALUES (?,?) IF not EXISTS;")
+                        .addPositionalValues(customer.getUserName(), customer.getName(), customer.getUserId(), customer.getTrxId())
                         .build();
         Flux.from(session.executeReactive(statement)).subscribe();
         return customer;
@@ -67,4 +75,8 @@ public class CustomerRepository {
     }
 
 
+    public Mono<Transactions> getTrx(String id) {
+        return Mono.from(session.executeReactive("SELECT * FROM tocomo.transactions WHERE user_name = ?  OR name = ? ;" ))
+                .map(row -> trx.trxQuery(row.getString("user_name"), row.getString("name"), row.getInt("amount"), row.getString("client_name"), row.getString("trx_type")));
+    }
 }

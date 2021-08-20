@@ -14,13 +14,23 @@ public class Customer {
     private String user_name;
     private String trx_id;
 
+    public Customer() {
+    }
+
     @Override
     public String toString() {
         return " Customer{" +
-                "id=" + user_id +
+                " ID =" + user_id +
                 ", userName ='" + user_name + '\'' +
                 ", Name = ' " + name + '\'' +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o){
+        if(this == o ) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return user_id == customer.user_id && Objects.equals(customer.user_name, user_name)  && Objects.equals(name, customer.name);
     }
 
     public Customer(UUID user_id, String user_name, String name, UUID trx_key) {
@@ -28,9 +38,6 @@ public class Customer {
         this.user_name = user_name;
         this.name = name;
         this.trx_id = trx_id.toString();
-    }
-
-    public Customer() {
     }
 
     public void Customers(String user_name, String name) {
@@ -53,6 +60,8 @@ public class Customer {
         return this;
     }
 
+
+
     public Customer customerQuery( String user_name, String name) {
         this.name = name;
         this.user_name = user_name;
@@ -69,16 +78,6 @@ public class Customer {
 
 
 
-
-
-
-    @Override
-    public boolean equals(Object o){
-    if(this == o ) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Customer customer = (Customer) o;
-    return user_id == customer.user_id && Objects.equals(customer.user_name, user_name)  && Objects.equals(name, customer.name);
-    }
 
     //@Override
     public int hashcode() {

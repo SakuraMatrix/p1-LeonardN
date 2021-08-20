@@ -83,4 +83,13 @@ public class Transactions {
         return this;
     }
 
+
+    public com.github.vazidev.tocomo.domain.Transactions trxQuery(String user_name, String name, int amount, String client_name, String trx_type) {
+        this.client_name = client_name;
+        this.user_name = user_name;
+        this.name = name;
+        this.amount = amount;
+        this.trx_type = trx_type;
+        return this;
+    }
 }
