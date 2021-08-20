@@ -12,7 +12,7 @@
 ##Cassandra Settings:
 Data Persistence maintained by aassandra DB.
 
- Cassandata KeySpace:
+ Cassandara KeySpace:
  
    1.  "tocomo"
 
@@ -32,7 +32,7 @@ HTML and Terminal based Services.
     3.  Accounts Review
     4.  Transactions Review
     5.  Accounts deletion
-    6.   Accounts Update
+    6.  Accounts Update
     
 
 
@@ -48,11 +48,13 @@ The following technologies are utilized withiin the API.
     vii.  Spring Framework
     viii. Github
 
-##RESTful Endpoints.
+
+
+##DataBase : REST Endpoints.
 
 ###tocomo.customers:
 
-    i.  GET / : Web Based GUI
+    i.    GET / : Web Based GUI
     ii.   GET /cust: Retrieves account information from the transactions database, utilizing "FLUX< >"
     ii.   GET /cust/{param} :  Singular Transactions Retrieval utilizing MONO< > 
     iii.  POST /cust/new : New Accounts Registration
@@ -65,4 +67,4 @@ The following technologies are utilized withiin the API.
   
   
   ### Currents Status:
-    1. Unable to connect Spring Query fucntionality to cassandra DB
+    1. Unable to connect Spring Query functionality to cassandra DB, by initiating the Reactive Server
