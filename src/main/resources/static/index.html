@@ -1,0 +1,88 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+<div id="header" class="header">
+    <h2>     Tocomo   </h2>
+    <h3>  Transfer Funds </h3>
+</div>
+
+<div class="tab">
+    <button class="tablinks" onclick="tocomoServices(event, &#39;Register&#39;)">Register</button>
+    <button class="tablinks active" onclick="tocomoServices(event, &#39;Send&#39;)">Send</button>
+    <button class="tablinks" onclick="tocomoServices(event, &#39;Transactions&#39;)">Transactions</button>
+</div>
+
+
+<div id="Send" class="tabcontent" style="display: block;">
+    <form method="post" action="trx/send">
+        <div class="container" border="2px," black="">
+            <h1> Send Money </h1>
+            <p> </p>
+            <hr>
+
+            <label for="user_name"><b>User Name</b></label>
+            <input type="text" placeholder="User Name" name="user_name" id="user_name" required=""/>
+            <br>
+            <label for="client_name"><b>Send To</b></label>
+            <input type="text" placeholder="Send To" name="client_name" id="client_name" required=""/>
+            <br>
+            <label for="amount"><b>Send Amount</b></label>
+            <input type="double" placeholder="$0.00" name="amount" id="amount" required=""/>
+            <br>
+            <div>
+                <label for="cRate"><b><i>Conversion Rate: 1:1 </i></b></label>
+                <br>
+                <label for="fAmount"><b><i>Receive Amount:</i></b></label><i><i>
+            </i></i></div><i><i>
+            <p>Click the Submit button to Continue!.</p>
+            <button type="submit" class="sendBtn">Send cash</button>
+        </i></i></div><i><i>
+
+
+        <div class="Sender">
+            <p> <a href="">View Transactions</a>.</p>
+
+        </div>
+
+    </i></i></form></div><i><i>
+
+    <div id="Register" class="tabcontent" style="display: none;">
+        <form method="post" action="customers/new">
+            <div class="container">
+                <h1>Register</h1>
+                <p>Please fill in the form to create an account.</p>
+                <br>
+
+                <label for="user_name"><b>User Name</b></label>
+                <input type="text" placeholder="User Name" name="user_name" id="user_name" required="">
+                <br>
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="Smith John" name="name" id="name" required="">
+                <br>
+                <br>
+
+                <p>Click the Submit Button to Register .</p>
+                <button type="Register" class="registerbtn">Register</button>
+            </div>
+
+        </form></div>
+
+
+    <div id="Transactions" class="tabcontent" style="display: none;">
+        <h2> Transaction Lists </h2>
+        <div>
+            <form method="post" action="/trx">
+                <button type="Register" class="registerbtn">View Activity</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+</i></i></body></html>
+

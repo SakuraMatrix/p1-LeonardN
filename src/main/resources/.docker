@@ -1,0 +1,2 @@
+ docker run -d -p 9042:9042 --name casstoco  -v"d:/ngang/onedrive/programmingfolder/p1-leonardn/src/main/resources:/tmp" cassandra
+

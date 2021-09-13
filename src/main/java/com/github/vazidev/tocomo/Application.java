@@ -1,20 +1,16 @@
-import reactor.netty.tcp.TcpServer;
-import reactor.core.publisher.Mono;
+package com.github.vazidev.tocomo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import reactor.core.publisher.Flux;
 import reactor.netty.DisposableServer;
 import reactor.netty.http.server.HttpServer;
 
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
-
-        DisposableServer server = HttpServer.create()
-                .handle((request, response)-> response.sendString(Mono.just("Welcome to Tocomo")))
-                .host("localhost")
-                .port(8080)
-                .bindNow();
-
-        Mono.when(server.onDispose())
-                .block();
-
-
+        SpringApplication.run(Application.class, args);
     }
+
 }
