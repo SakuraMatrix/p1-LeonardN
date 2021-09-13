@@ -1,6 +1,7 @@
 package com.github.vazidev.tocomo;
 
-import com.github.vazidev.tocomo.service.CustomerService;
+import com.github.vazidev.tocomo.service.TocomoServices;
+import com.github.vazidev.tocomo.service.TrxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -8,11 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.data.cassandra.config.AbstractReactiveCassandraConfiguration;
-import org.springframework.data.cassandra.config.SchemaAction;
-import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
-import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
@@ -23,23 +19,19 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 import reactor.netty.http.server.HttpServer;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 @ComponentScan
-@EnableCassandraRepositories(basePackages = {"com.github.vazidev.tocomo.repository"})
-// basePackageClasses  = {AppConfig.class})
-public class AppConfig extends AbstractReactiveCassandraConfiguration {
-    @Autowired
-    CustomerService customerService;
+public class AppConfig {
+   // @Autowired
+    TocomoServices tocomoServices;
+    TrxService trxService;
 
     /* @Bean   //Section replaced with the HTTP Server below
     public CqlSession session(){
     return CqlSession.builder().build();
     }**/
 
-    /**   @Bean //Section replaced by the Access Controller Class, as part of Spring reactive Implementation
+    /**  // @Bean //Section replaced by the Access Controller Class, as part of Spring reactive Implementation
     public DisposableServer server() throws URISyntaxException { //set Netty Disposable Server @ port 8080
         Path indexHtml = Paths.get(Objects.requireNonNull(Application.class.getResource("/index.html")).toURI());
         Path error404 = Paths.get(Objects.requireNonNull(Application.class.getResource("/404.html")).toURI());
@@ -93,33 +85,10 @@ public class AppConfig extends AbstractReactiveCassandraConfiguration {
         ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(handler);
         return HttpServer.create().port(8080).handle(adapter);
     }
-    @Override
-    protected String getKeyspaceName(){
-        return "tocomo";
-    }
 
-    @Override
-    protected String getContactPoints(){
-       return "localhost";
-    }
-
-    @Override
-    public SchemaAction getSchemaAction(){
-        return SchemaAction.CREATE_IF_NOT_EXISTS;
-    }
-
-    @Override
-    protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
-        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace("tocomo")
-                .ifNotExists()
-                .with(KeyspaceOption.DURABLE_WRITES, true);
-        return Arrays.asList(specification);
-    }
-
-
-    //creates a bean pathways to an HTML File; for HTML Data entry
+     //creates a bean pathways to an HTML File; for HTML Data entry
     @Bean
-    public RouterFunction<ServerResponse> indexRouter(@Value("classpath:index.html") Resource IndexHTMLFile) {
+    public RouterFunction<ServerResponse> indexRouter(@Value("classpath:static/index.html") Resource IndexHTMLFile) {
         return RouterFunctions.route(RequestPredicates.GET("/"), request -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValue(IndexHTMLFile));
     }
 

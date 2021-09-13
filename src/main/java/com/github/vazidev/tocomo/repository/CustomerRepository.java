@@ -1,21 +1,15 @@
 package com.github.vazidev.tocomo.repository;
 
-import com.datastax.oss.driver.api.core.CqlSession;
-import com.datastax.oss.driver.api.core.cql.SimpleStatement;
 import com.github.vazidev.tocomo.domain.Customer;
-import com.github.vazidev.tocomo.domain.Transactions;
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import java.util.UUID;
+import org.springframework.web.bind.annotation.RestController;
 
 @Repository
-// makes call to the Customers database
+@RestController
 public interface CustomerRepository extends ReactiveCassandraRepository<Customer, Integer> {
-
 }
+
 /**All the statements belwo replace by Spring Cassandra with the in build classes
  public class CustomerRepository {
     private CqlSession session;

@@ -2,18 +2,21 @@ package com.github.vazidev.tocomo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.netty.http.server.HttpServer;
-
 import java.net.URISyntaxException;
 import java.time.Duration;
 
-public class Application {
+@RestController
+//@SpringBootApplication
+public class TocomoApp {
     static final ObjectMapper OBJECT_MAPPER =  new ObjectMapper();
         
     public static void main(String[] args) throws URISyntaxException {
+       // SpringApplication.run(TocomoApp.class, args)
 
         //utilizing spring bean
-        AnnotationConfigApplicationContext applicationContext =  new AnnotationConfigApplicationContext(AppConfig.class);
+       AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
         //Bind the  Http Server using the Spring Bean/ running @ port 8080
         applicationContext.getBean(HttpServer.class).bindUntilJavaShutdown(Duration.ofSeconds(60), null);

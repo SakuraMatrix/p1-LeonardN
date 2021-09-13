@@ -1,73 +1,21 @@
 
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-	body {font-family: Arial;}
-	
-	/* style the header */
-	.header {
-	text-align = center;
-	text-color = green;
-	background-color:#C5A78B ;
-	}
-	
-	label, input{
-	margin:15px;
-	}
-	
-	form {
-		max-width: 350px;
-		border: 1px, solid, grey;
-	}
-	
-	/* Style the tab */
-	.tab {
-	  overflow: hidden;
-	  border: 1px solid #ccc;
-	  background-color: #f1f1f1;
-	}
+	<link rel="stylesheet" href="/style.css">
+	<script src="script.js"></script>
 
-	/* Style the buttons inside the tab */
-	.tab button {
-	  background-color: inherit;
-	  float: left;
-	  border: none;
-	  outline: none;
-	  cursor: pointer;
-	  padding: 14px 16px;
-	  transition: 0.3s;
-	  font-size: 17px;
-	}
 
-	/* Change background color of buttons on hover */
-	.tab button:hover {
-	  background-color: #ddd;
-	}
-
-	/* Create an active/current tablink class */
-	.tab button.active {
-	  background-color: #ccc;
-	}
-
-	/* Style the tab content */
-	.tabcontent {
-	  display: none;
-	  padding: 6px 12px;
-	  border: 1px solid #ccc;
-	  border-top: none;
-	}
-</style>
 </head>
 <body>
 <div id="header" class="header">
-<h2>     Tocomo   </h2>
-<h3>  Transfer Funds </h3>
+<h1>     Tocomo   </h1>
+<h3> <i>Transfer Funds</i>  </h3>
 </div>
 
 <div class="tab">
-	<button class="tablinks" onclick="customerService(event, &#39;Register&#39;)">Register</button>
-	<button class="tablinks active" onclick="customerService(event, &#39;Send&#39;)">Send</button>
-	<button class="tablinks" onclick="customerService(event, &#39;Transactions&#39;)">Transactions</button>
+	<button class="tablinks" onclick="tocomoServices(event, &#39;Register&#39;)">Registers</button>
+	<button class="tablinks active" onclick="tocomoServices(event, &#39;Send&#39;)">Send</button>
+	<button class="tablinks" onclick="tocomoServices(event, &#39;Transactions&#39;)">Transactions</button>
  </div>
  
  
@@ -86,15 +34,17 @@
 			<br>
 			<label for="amount"><b>Send Amount</b></label>
 			<input type="double" placeholder="$0.00" name="amount" id="amount" required=""/>
-			<br>
-			<div>
+			<br><br>
+			<div class="footer">
 				<label for="cRate"><b><i>Conversion Rate: 1:1 </i></b></label>
 				<br>
 				<label for="fAmount"><b><i>Receive Amount:</i></b></label><i><i>
-			</i></i></div><i><i>
+			</i></i></div>
+			<i>
+			<div class="formBtn">
 			<p>Click the Submit button to Continue!.</p>
-			<button type="submit" class="sendBtn">Send cash</button>
-		</i></i></div><i><i>
+			<button type="submit" class="sendBtn">Send cash</button></div>
+		</i></div><i><i>
 		<br>
 		<br>
 
@@ -168,20 +118,6 @@
 
 
 
-<script>
-	function customerService(evt, Request) {
-	  var i, tabcontent, tablinks;
-	  tabcontent = document.getElementsByClassName("tabcontent");
-	  for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	  }
-	  tablinks = document.getElementsByClassName("tablinks");
-	  for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	  }
-	  document.getElementById(Request).style.display = "block";
-	  evt.currentTarget.className += " active";
-	}
-</script>
+
 
 </i></i></body></html>

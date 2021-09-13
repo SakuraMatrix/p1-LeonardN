@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+
     <groupId>com.github.vazidev</groupId>
     <artifactId>p1-LeonardN</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -18,7 +26,7 @@
                 <artifactId>js-import-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass> com.github.vazidev.tocomo.Application</mainClass>
+                    <mainClass>com.github.vazidev.tocomo.TocomoApp</mainClass>
                 </configuration>
             </plugin>
             <!-- Maven Assembly plugin -->
@@ -28,7 +36,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass> com.github.vazidev.tocomo.Application</mainClass>
+                            <mainClass>com.github.vazidev.tocomo.TocomoApp</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
